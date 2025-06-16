@@ -1,16 +1,13 @@
-FROM ubuntu:latest AS build
+# Etapa 1: build com Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-21-jdk -y
+WORKDIR /app
 COPY . .
+RUN mvn clean install -DskipTests=true
 
-RUN apt-get install maven -y
-RUN mvn clean install
+# Etapa 2: runtime
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/unfollow.jar app.jar
 
-FROM openjdk:21-jdk-slim
-
-EXPOSE 8080
-
-COPY --from=build target/unfollow.jar app.jar
-
-ENTRYPOINT [ "java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
