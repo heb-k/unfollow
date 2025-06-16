@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">UNFOLLOW</a>
+    
+  </div>
+</nav>
+<div class="centralizado">
+    <form th:action="@{/login-prof}" method="post" class="form-container">
+    <label for="cd_prof">Selecione o professor:</label>
+    <select id="cd_prof" name="cd_prof" required>
+        <option th:each="prof : ${professores}"
+                th:value="${prof}"
+                th:text="'Professor #' + ${prof}">
+        </option>
+    </select>
+    <button type="submit">Entrar</button>
+    </div>
+</form>
+</body>
+</html>
+

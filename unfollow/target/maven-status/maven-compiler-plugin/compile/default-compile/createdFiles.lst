@@ -1,0 +1,5 @@
+com\aulabd\bd\BdApplication.class
+com\aulabd\bd\controller\MainController.class
+com\aulabd\bd\model\Cliente.class
+com\aulabd\bd\model\ClienteService.class
+com\aulabd\bd\model\ClienteDAO.class

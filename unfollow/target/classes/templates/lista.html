@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alunos da disciplina</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">UNFOLLOW</a>
+    <ul class="nav-links">
+      <li><a th:href="@{/listarD}">Disciplinas</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <h1>Alunos da disciplina</h1>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>CPF</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody th:each="cli: ${clientes}">
+            <tr>
+                <td th:text="${cli.id}"></td>
+                <td th:text="${cli.nome}"></td>
+                <td th:text="${cli.cpf}"></td>
+                <td><a th:href="@{'/aluno?d=' + ${id} + '&ad=' + ${cli.id}}">Avaliar</a></td>
+                <td><a th:href="@{'/deletar/' + ${id} + '/' + ${cli.id}}">Desmatricular</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

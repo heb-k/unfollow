@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>LISTAGEM DE DISCIPLINAS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">UNFOLLOW</a>
+    <ul><li>
+        <a th:href="@{/logout}">Logout</a>
+    </li></ul>    
+</div>
+</nav>
+    <h1>DISCIPLINAS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>PROF</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody th:each="dis: ${disciplinas}">
+            <tr>
+                <td th:text="${dis.id}"></td>
+                <td th:text="${dis.nm_disciplina}"></td>
+                <td th:text="${dis.cd_prof}"></td>
+                <td><a th:href="@{'/listar/' + ${dis.id}}">Alunos</a></td>
+                <td><a th:href="@{'/matricula?id=' + ${dis.id}}">Matricular Alunos</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

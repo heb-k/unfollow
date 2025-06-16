@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matricular aluno</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">UNFOLLOW</a>
+    <ul>
+        <li><a th:href="@{/listarD}">Voltar</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="centralizado">
+    <form th:action="@{/matricula}" method="post">
+    <label for="cd_cliente">Selecione o aluno:</label>
+    <input id="disc" name="disc" type="number" hidden th:value="${disc}">
+    <select id="cd_cliente" name="cd_cliente" required>
+        <option th:each="cli : ${clientes}"
+                th:value="${cli.id}"
+                th:text="${cli.nome}">
+        </option>
+    </select>
+    <button type="submit">Matricular</button>
+</form>
+</div>
+</body>
+</html>
+

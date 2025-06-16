@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alunos da disciplina</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">UNFOLLOW</a>
+    <ul class="nav-links">
+      <li><a th:href="@{/listarD}">Disciplinas</a></li>
+      <li><a th:href="@{'/listar/' + ${nota.cd_disciplina}}">Voltar</a></li>
+    </ul>
+  </div>
+</nav>
+    <h1 th:text="${cliente.nome}"></h1><br>
+    <table>
+        <thead>
+            <tr>
+                <th>A1</th>
+                <th>A2</th>
+                <th>Média</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <form th:action="@{/editar}" method="post">
+                    <input id="a1" name="a1" max="10" min="0" type="number" th:value="${nota.a1}" disabled>
+                    <input type="number" name="d" hidden th:value="${nota.cd_disciplina}">
+                    <input type="number" name="ad" hidden th:value="${cliente.id}">
+                    <input type="number" name="a" hidden value="1">
+                    <input type="submit" hidden>
+                    </form><button id="insere">Editar</button><br></td>
+                <td>
+                    <form th:action="@{/editar}" method="post">
+                    <input id="a2" name="a2" type="number" max="10" min="0" th:value="${nota.a2}" disabled>
+                    <input type="number" name="d" hidden th:value="${nota.cd_disciplina}">
+                    <input type="number" name="ad" hidden th:value="${cliente.id}">
+                    <input type="number" name="a" hidden value="2">
+                    <input type="submit" hidden>
+                    </form><button id="insere2">Editar</button><br></td>
+                <td id="media"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+window.addEventListener("DOMContentLoaded", function () {
+    const a1Input = document.getElementById("a1");
+    const a2Input = document.getElementById("a2");
+    const btnInserirA1 = document.getElementById("insere");
+    const btnInserirA2 = document.getElementById("insere2");
+    const mediaTd = document.getElementById("media");
+
+    const a1FormSubmit = a1Input.parentElement.querySelector("input[type=submit]");
+    const a2FormSubmit = a2Input.parentElement.querySelector("input[type=submit]");
+
+    // Seleciona os botões irmãos de cada input
+    const btnAtualizarA1 = document.getElementById("at1");
+    const btnExcluirA1 = document.getElementById("ex1");
+
+
+    const btnAtualizarA2 = document.getElementById("at2");
+    const btnExcluirA2 = document.getElementById("ex2");
+
+    function calcularMedia() {
+        const valorA1 = a1Input.value.trim();
+        const valorA2 = a2Input.value.trim();
+
+        const a1 = parseFloat(valorA1);
+        const a2 = parseFloat(valorA2);
+
+        if (!isNaN(a1) && !isNaN(a2)) {
+            const media = (a1 + a2) / 2;
+            mediaTd.innerText = media.toFixed(2);
+        } else {
+            mediaTd.innerText = "—";
+        }
+    }
+    
+    // A1
+    
+
+    // Cálculo inicial da média
+    calcularMedia();
+
+    // Atualiza média em tempo real
+    a1Input.addEventListener("input", calcularMedia);
+    a2Input.addEventListener("input", calcularMedia);
+
+    // Liberar edição
+    btnInserirA1.addEventListener("click", function () {
+        a1Input.disabled = false;
+        a1FormSubmit.hidden = false;
+        btnInserirA1.style.display = "none";
+    });
+
+    btnInserirA2.addEventListener("click", function () {
+        a2Input.disabled = false;
+        a2FormSubmit.hidden = false;
+        btnInserirA2.style.display = "none";
+    });
+});
+</script>
+
+
+
+
+</body>
+</html>
